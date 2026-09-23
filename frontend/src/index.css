@@ -1,37 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* Colors */
-  --color-surface: #f5fbf6;
-  --color-surface-dim: #d5dbd6;
-  --color-surface-bright: #f5fbf6;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #eff5f0;
-  --color-surface-container: #e9efea;
-  --color-surface-container-high: #e4eae5;
-  --color-surface-container-highest: #dee4df;
-  --color-on-surface: #171d1a;
-  --color-on-surface-variant: #414845;
-  --color-inverse-surface: #2c322f;
-  --color-inverse-on-surface: #ecf2ed;
-  --color-outline: #727974;
-  --color-outline-variant: #c1c8c3;
-
-  --color-primary: #1a3a2f;
+  /* ---- Ceylon Blooms design system — flexible Sri Lankan florist palette ---- */
+  --color-primary: #02241a;
   --color-on-primary: #ffffff;
   --color-primary-container: #1a3a2f;
   --color-on-primary-container: #82a496;
+  --color-primary-fixed: #c7ebda;
+  --color-primary-fixed-dim: #abcebf;
+  --color-on-primary-fixed: #002117;
+  --color-on-primary-fixed-variant: #2d4d41;
+  --color-inverse-primary: #abcebf;
 
   --color-secondary: #675c56;
   --color-on-secondary: #ffffff;
   --color-secondary-container: #efdfd7;
   --color-on-secondary-container: #6d625c;
+  --color-secondary-fixed: #efdfd7;
+  --color-secondary-fixed-dim: #d3c4bc;
+  --color-on-secondary-fixed: #221a15;
+  --color-on-secondary-fixed-variant: #4f453f;
 
   --color-tertiary: #735c00;
   --color-on-tertiary: #ffffff;
   --color-tertiary-container: #cca830;
   --color-on-tertiary-container: #4f3e00;
+  --color-tertiary-fixed: #ffe088;
+  --color-tertiary-fixed-dim: #e9c349;
+  --color-on-tertiary-fixed: #241a00;
+  --color-on-tertiary-fixed-variant: #574500;
 
   --color-error: #ba1a1a;
   --color-on-error: #ffffff;
@@ -41,52 +38,105 @@
   --color-background: #f5fbf6;
   --color-on-background: #171d1a;
 
-  /* Fonts */
+  --color-surface: #f5fbf6;
+  --color-surface-dim: #d5dbd6;
+  --color-surface-bright: #f5fbf6;
+  --color-surface-tint: #456558;
+  --color-surface-variant: #dee4df;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #eff5f0;
+  --color-surface-container: #e9efea;
+  --color-surface-container-high: #e4eae5;
+  --color-surface-container-highest: #dee4df;
+
+  --color-on-surface: #171d1a;
+  --color-on-surface-variant: #414845;
+  --color-inverse-surface: #2c322f;
+  --color-inverse-on-surface: #ecf2ed;
+
+  --color-outline: #727974;
+  --color-outline-variant: #c1c8c3;
+
+  /* ---- Fonts ---- */
   --font-display: "Playfair Display", serif;
   --font-body: "Plus Jakarta Sans", sans-serif;
 
-  /* Font sizes */
+  /* ---- Type scale (matches Stitch design tokens exactly) ---- */
   --text-display-lg: 48px;
   --text-display-lg--line-height: 56px;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 600;
+
   --text-headline-lg: 32px;
   --text-headline-lg--line-height: 40px;
+  --text-headline-lg--font-weight: 500;
+
   --text-headline-md: 24px;
   --text-headline-md--line-height: 32px;
+  --text-headline-md--font-weight: 500;
+
   --text-headline-sm: 20px;
   --text-headline-sm--line-height: 28px;
+  --text-headline-sm--font-weight: 500;
+
   --text-title-md: 16px;
   --text-title-md--line-height: 24px;
+  --text-title-md--letter-spacing: 0.01em;
+  --text-title-md--font-weight: 600;
+
   --text-body-lg: 18px;
   --text-body-lg--line-height: 28px;
+
   --text-body-md: 15px;
   --text-body-md--line-height: 24px;
+
   --text-body-sm: 13px;
   --text-body-sm--line-height: 20px;
+
   --text-label-md: 13px;
   --text-label-md--line-height: 18px;
+  --text-label-md--letter-spacing: 0.04em;
+  --text-label-md--font-weight: 600;
+
   --text-label-sm: 11px;
   --text-label-sm--line-height: 16px;
+  --text-label-sm--letter-spacing: 0.08em;
+  --text-label-sm--font-weight: 700;
+
   --text-currency-md: 18px;
   --text-currency-md--line-height: 24px;
+  --text-currency-md--letter-spacing: -0.01em;
+  --text-currency-md--font-weight: 600;
 
-  /* Border radius */
+  /* ---- Radius ---- */
   --radius-sm: 0.25rem;
   --radius-DEFAULT: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
-
-  /* Spacing */
-  --spacing-gutter: 1.5rem;
-  --spacing-gutter-mobile: 1rem;
-  --spacing-margin: 3rem;
-  --spacing-margin-mobile: 1.25rem;
+  --radius-full: 9999px;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--color-surface);
+  background:
+    radial-gradient(circle at top, rgba(158, 195, 171, 0.18), transparent 20%),
+    var(--color-surface);
   color: var(--color-on-surface);
   font-family: var(--font-body);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
 }
