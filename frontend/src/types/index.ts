@@ -29,3 +29,18 @@ export interface Testimonial {
   orderedItem: string
   initials: string
 }
+
+export interface CatalogProduct {
+  id: string
+  name: string
+  series: string
+  description: string
+  imageUrl: string
+  price: number
+  oldPrice?: number
+  stemsLabel: string
+  badge?: string
+  note: string
+  noteTone?: 'positive' | 'neutral'
+  featured?: boolean
+}

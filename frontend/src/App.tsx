@@ -1,15 +1,32 @@
+import { Routes, Route } from 'react-router-dom'
+import Layout from './components/layout/Layout'
+import Home from './pages/Home'
+import CategoryListing from './pages/CategoryListing'
+import ProductDetail from './pages/ProductDetail'
+import WeddingEvents from './pages/WeddingEvents'
+import About from './pages/About'
+import BespokeInquiry from './pages/BespokeInquiry'
+import SignIn from './pages/SignIn'
+import Register from './pages/Register'
+import Checkout from './pages/Checkout'
+import TrackOrder from './pages/TrackOrder'
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-surface">
-      <div className="text-center">
-        <h1 className="font-display text-display-lg text-primary">
-          Ceylon Petals
-        </h1>
-        <p className="font-body text-body-lg text-on-surface-variant mt-4">
-          Artisanal Blooms Handcrafted with Ceylon Elegance
-        </p>
-      </div>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/products/:categorySlug" element={<CategoryListing />} />
+        <Route path="/product/:productId" element={<ProductDetail />} />
+        <Route path="/wedding-events" element={<WeddingEvents />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/bespoke" element={<BespokeInquiry />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/track-order" element={<TrackOrder />} />
+      </Route>
+    </Routes>
   )
 }
 
