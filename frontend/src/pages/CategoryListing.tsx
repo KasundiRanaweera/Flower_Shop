@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom'
 import CatalogHero from '../components/catalog/CatalogHero'
 import FilterBar from '../components/catalog/FilterBar'
 import FilterSidebar from '../components/catalog/FilterSidebar'
-import ProductGrid, { FRESH_BOUQUETS } from '../components/catalog/ProductGrid'
+import ProductGrid from '../components/catalog/ProductGrid'
 import Pagination from '../components/catalog/Pagination'
 import FreshnessPromise from '../components/catalog/FreshnessPromise'
 import ConsultationCTA from '../components/catalog/ConsultationCTA'
+import { FRESH_BOUQUETS } from '../components/catalog/catalogData'
 
 // TODO (Phase 2): replace this lookup with real category data from GET /api/categories/:slug
 const CATEGORY_META: Record<string, { title: string; subtitle: string; breadcrumb: string; badge: string; pills: { label: string; count: number }[] }> = {
