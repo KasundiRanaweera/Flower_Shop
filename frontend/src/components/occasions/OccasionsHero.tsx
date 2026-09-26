@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Home, ChevronRight, Sparkles, ShieldCheck } from 'lucide-react'
+import { ChevronRight, Sparkles, ShieldCheck } from 'lucide-react'
 
 export default function OccasionsHero() {
   return (
