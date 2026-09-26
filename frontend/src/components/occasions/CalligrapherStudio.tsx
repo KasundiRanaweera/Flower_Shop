@@ -1,0 +1,170 @@
+import { useState } from 'react'
+import { PenTool, BookOpen, BadgeCheck, Brush } from 'lucide-react'
+
+const CARD_THEMES = [
+  {
+    id: 'anniversary',
+    label: 'Golden Anniversary',
+    previewLabel: 'Golden Anniversary Letter',
+    defaultMessage: "May our shared journey blossom forever with the grace of Nuwara Eliya mornings. Happy 10th Anniversary, my eternal love.",
+  },
+  {
+    id: 'birthday',
+    label: 'Birthday Milestone',
+    previewLabel: 'Birthday Jubilee Inscription',
+    defaultMessage: "Wishing you a vibrant year brimming with sunshine, fresh blooms, and radiant joy. Happy Birthday!",
+  },
+  {
+    id: 'condolence',
+    label: 'Deep Condolences',
+    previewLabel: 'Comfort & Gentle Solace',
+    defaultMessage: "Holding your family deeply in our thoughts during this quiet hour. May fondest memories bring warmth and peace to your hearts.",
+  },
+]
+
+const WAX_COLORS = [
+  { id: 'emerald', hex: '#1A3A2F', label: 'Botanical Emerald' },
+  { id: 'gold', hex: '#CCA830', label: 'Royal Gold' },
+  { id: 'rosequartz', hex: '#D39C93', label: 'Rose Quartz' },
+]
+
+// Converted from the original vanilla-JS DOM manipulation (selectWax, selectCardTheme,
+// updateLivePreview) into a single piece of React state driving the live preview.
+export default function CalligrapherStudio() {
+  const [themeId, setThemeId] = useState('anniversary')
+  const [waxId, setWaxId] = useState('emerald')
+  const [message, setMessage] = useState(CARD_THEMES[0].defaultMessage)
+
+  const theme = CARD_THEMES.find((t) => t.id === themeId)!
+  const wax = WAX_COLORS.find((w) => w.id === waxId)!
+
+  function handleThemeSelect(id: string) {
+    setThemeId(id)
+    const found = CARD_THEMES.find((t) => t.id === id)
+    if (found) setMessage(found.defaultMessage)
+  }
+
+  return (
+    <section className="w-full bg-surface py-14">
+      <div className="max-w-7xl mx-auto px-4 lg:px-12">
+        <div className="bg-surface-container-lowest rounded-2xl p-8 lg:p-12 shadow-md">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Studio controls */}
+            <div className="lg:col-span-6 space-y-4">
+              <div>
+                <div className="inline-flex items-center gap-2 text-tertiary text-[11px] uppercase tracking-widest">
+                  <PenTool size={16} />
+                  Complimentary Service
+                </div>
+                <h2 className="font-display text-headline-lg text-primary mt-1">Complimentary Calligrapher Studio</h2>
+                <p className="text-body-md text-secondary mt-1">
+                  Every occasion arrangement includes a personalized card, handwritten by our
+                  calligrapher and sealed with a hand-poured wax seal.
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-label-md text-primary mb-2">1. Select Occasion Card</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {CARD_THEMES.map((t) => (
+                    <button
+                      key={t.id}
+                      type="button"
+                      onClick={() => handleThemeSelect(t.id)}
+                      className={`p-2 rounded-lg bg-surface-container-low text-center text-[11px] transition-colors ${
+                        t.id === themeId ? 'font-bold text-primary' : 'text-secondary hover:text-primary'
+                      }`}
+                    >
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-label-md text-primary mb-2">2. Choose Wax Seal Colour</label>
+                <div className="flex items-center gap-4">
+                  {WAX_COLORS.map((w) => (
+                    <button
+                      key={w.id}
+                      type="button"
+                      onClick={() => setWaxId(w.id)}
+                      className={`flex items-center gap-2 p-1.5 rounded-full transition-colors ${
+                        w.id === waxId ? 'bg-surface-container-high ring-2 ring-primary' : 'bg-surface-container-low hover:bg-surface-container'
+                      }`}
+                    >
+                      <span className="w-6 h-6 rounded-full inline-block shadow-sm" style={{ backgroundColor: w.hex }} />
+                      <span className={`text-[11px] pr-2 ${w.id === waxId ? 'text-primary' : 'text-secondary'}`}>{w.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-label-md text-primary" htmlFor="custom-message">3. Write Your Message</label>
+                  <span className="text-[11px] text-secondary">{message.length}/250 characters</span>
+                </div>
+                <textarea
+                  id="custom-message"
+                  maxLength={250}
+                  rows={3}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Enter names, sentiments, or memorable moments..."
+                  className="w-full bg-surface-container-low rounded-lg p-4 text-body-md text-primary focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-outline"
+                />
+              </div>
+
+              <div className="flex items-center gap-2 text-surface-tint text-body-sm">
+                <Brush size={18} />
+                <span>Handwritten with black ink by our resident calligrapher.</span>
+              </div>
+            </div>
+
+            {/* Live preview */}
+            <div className="lg:col-span-6 flex justify-center">
+              <div className="w-full max-w-md bg-[#FAF7F2] text-[#2C241E] p-8 rounded-xl shadow-lg relative min-h-[380px] flex flex-col justify-between overflow-hidden">
+                <div className="absolute -right-8 -top-8 w-40 h-40 opacity-10 pointer-events-none">
+                  <svg className="w-full h-full fill-current text-primary" viewBox="0 0 100 100">
+                    <path d="M50 0 C60 30 70 40 100 50 C70 60 60 70 50 100 C40 70 30 60 0 50 C30 40 40 30 50 0 Z" />
+                  </svg>
+                </div>
+
+                <div className="flex justify-between items-start">
+                  <div className="space-y-0.5">
+                    <span className="font-display text-[16px] text-primary tracking-widest uppercase block">Ceylon Petals</span>
+                    <span className="text-[9px] uppercase tracking-widest text-[#7D7065]">{theme.previewLabel}</span>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-[#EFE9DF] flex items-center justify-center text-[#7D7065]">
+                    <BookOpen size={16} />
+                  </div>
+                </div>
+
+                <div className="my-4">
+                  <p className="font-display italic text-[19px] leading-relaxed text-[#1D1917] tracking-wide whitespace-pre-wrap">
+                    "{message}"
+                  </p>
+                  <div className="mt-4 text-right font-display italic text-[15px] text-[#4A3F35]">— With Love</div>
+                </div>
+
+                <div className="pt-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-[10px] text-[#7D7065] tracking-widest uppercase">
+                    <span>COLOMBO</span>
+                  </div>
+                  <div
+                    className="flex items-center gap-2 text-[#FAF7F2] px-4 py-1.5 rounded-full shadow-md transition-all duration-300"
+                    style={{ backgroundColor: wax.hex }}
+                  >
+                    <BadgeCheck size={16} className="text-[#CCA830]" />
+                    <span className="text-[10px] tracking-wider uppercase">{wax.label} Seal</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
