@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
+import Occasions from './pages/Occasions'
 import CategoryListing from './pages/CategoryListing'
 import ProductDetail from './pages/ProductDetail'
 import WeddingEvents from './pages/WeddingEvents'
@@ -11,11 +12,12 @@ import Register from './pages/Register'
 import Checkout from './pages/Checkout'
 import TrackOrder from './pages/TrackOrder'
 
-function App() {
+export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/products/occasions" element={<Occasions />} />
         <Route path="/products/:categorySlug" element={<CategoryListing />} />
         <Route path="/product/:productId" element={<ProductDetail />} />
         <Route path="/wedding-events" element={<WeddingEvents />} />
@@ -29,5 +31,3 @@ function App() {
     </Routes>
   )
 }
-
-export default App
