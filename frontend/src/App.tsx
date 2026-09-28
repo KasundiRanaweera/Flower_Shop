@@ -11,6 +11,7 @@ import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Checkout from './pages/Checkout'
 import TrackOrder from './pages/TrackOrder'
+import LuxuryHampers from './pages/LuxuryHampers'
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/products/occasions" element={<Occasions />} />
+        <Route path="/products/luxury-hampers" element={<LuxuryHampers />} />
         <Route path="/products/:categorySlug" element={<CategoryListing />} />
         <Route path="/product/:productId" element={<ProductDetail />} />
         <Route path="/wedding-events" element={<WeddingEvents />} />
