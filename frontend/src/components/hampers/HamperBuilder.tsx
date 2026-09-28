@@ -164,5 +164,5 @@ export default function HamperBuilder() {
         </div>
       </div>
     </section>
-  ) 
+  )
 }
