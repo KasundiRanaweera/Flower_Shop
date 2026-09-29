@@ -1,8 +1,17 @@
+import WeddingHero from '../components/wedding/WeddingHero'
+import ServiceBento from '../components/wedding/ServiceBento'
+import ConsultationSection from '../components/wedding/ConsultationSection'
+import PortfolioSection from '../components/wedding/PortfolioSection'
+import StandardSection from '../components/wedding/StandardSection'
+
 export default function WeddingEvents() {
   return (
-    <section className="section-shell py-16">
-      <h1 className="font-display text-4xl text-[#1a3a2f]">Wedding Events</h1>
-      <p className="mt-4 text-[#4d5852]">This page will cover wedding floral packages and event styling.</p>
-    </section>
+    <div className="flex flex-col w-full">
+      <WeddingHero />
+      <ServiceBento />
+      <ConsultationSection />
+      <PortfolioSection />
+      <StandardSection />
+    </div>
   )
 }
