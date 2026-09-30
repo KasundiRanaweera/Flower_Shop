@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import Occasions from './pages/Occasions'
+import LuxuryHampers from './pages/LuxuryHampers'
+import IndoorPlants from './pages/IndoorPlants'
 import CategoryListing from './pages/CategoryListing'
 import ProductDetail from './pages/ProductDetail'
 import WeddingEvents from './pages/WeddingEvents'
@@ -11,7 +13,6 @@ import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Checkout from './pages/Checkout'
 import TrackOrder from './pages/TrackOrder'
-import LuxuryHampers from './pages/LuxuryHampers'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products/occasions" element={<Occasions />} />
         <Route path="/products/luxury-hampers" element={<LuxuryHampers />} />
+        <Route path="/products/indoor-plants" element={<IndoorPlants />} />
         <Route path="/products/:categorySlug" element={<CategoryListing />} />
         <Route path="/product/:productId" element={<ProductDetail />} />
         <Route path="/wedding-events" element={<WeddingEvents />} />
