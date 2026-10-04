@@ -1,0 +1,136 @@
+import { useState } from 'react'
+import { Sunrise, Truck, Scissors, DoorOpen } from 'lucide-react'
+
+interface TimelineStep {
+  id: number
+  icon: typeof Sunrise
+  time: string
+  label: string
+  tag: string
+  title: string
+  description: string
+  stat1Label: string
+  stat1Value: string
+  stat2Label: string
+  stat2Value: string
+  imageUrl: string
+  imageCaption: string
+}
+
+const STEPS: TimelineStep[] = [
+  {
+    id: 0, icon: Sunrise, time: 'Early Morning', label: 'Highland Harvest',
+    tag: 'HARVEST', title: 'Early Hand-Harvest in the Highlands',
+    description:
+      "Stems are cut early, while it's cool and the plants are well hydrated. They're placed in water right away to seal the cut and keep them fresh for the journey.",
+    stat1Label: 'Harvest Time', stat1Value: 'Early Morning',
+    stat2Label: 'Post-Cut Care', stat2Value: 'Immediate Hydration',
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuByYR6Z0imMMYt82L9LK-wGOElBMLbuVxAURK_jXN5kOU5LhgoyYF7ogjzqSZvaccDhycA3pAlXeHGXGqsg6rBY0j1VtMIrmZCuzy7qmYi4txSJOG2Q01G8PrYW2a1U5ZToGKUDOmOhHju6j_-1z1QWZH3IqJrPii-SHz-gRO99-2DVrgZ6eObwPUpOwqufYCOUlaDku1yM-YGq7q_Go6NUNb601oY9EeYYKSqxGT8Ne-rdUQoGos-hrg',
+    imageCaption: 'Cut fresh in the highlands each morning',
+  },
+  {
+    id: 1, icon: Truck, time: 'Morning', label: 'Cool Transit',
+    tag: 'TRANSIT', title: 'Temperature-Conscious Transport to Colombo',
+    description:
+      "Stems travel down to Colombo in cooled, insulated transport, kept out of direct heat and sunlight for the journey from the hills to our studio.",
+    stat1Label: 'Transit Conditions', stat1Value: 'Cool & Shaded',
+    stat2Label: 'Handling', stat2Value: 'Minimal Movement',
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDfEZqb2rdYT4qfGPZRsWQ5iDVPOIlF_jALfnqg4VwbWA_oB2uthdliMNCr6QA7mOdmlhfCl6Bdn8_5Ex6HiNw6xY0oQthmh9EYZl9gQoshKe-qiajs3OrkhO1x2EBkPjdW40m5LMljcSANV3Jk89CnVgTdykF_tbsXw31IFUDgC_RnW5jaN5Sbn8W5q3pQgwb7DKtP6KjJ3lepFLuHYc6e2mosvAcj7a3omEE7paKtMEuexyGOjNOAJA',
+    imageCaption: 'Cooled transport from hills to city',
+  },
+  {
+    id: 2, icon: Scissors, time: 'Late Morning', label: 'Studio Artistry',
+    tag: 'CRAFTSMANSHIP', title: 'Arranged at Our Colombo Studio',
+    description:
+      'Each stem is re-cut underwater and conditioned before our florists hand-select and arrange blooms, finishing every piece with quality ribbon and packaging.',
+    stat1Label: 'Technique', stat1Value: 'Underwater Re-Cut',
+    stat2Label: 'Finishing', stat2Value: 'Hand-Tied & Wrapped',
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuByYR6Z0imMMYt82L9LK-wGOElBMLbuVxAURK_jXN5kOU5LhgoyYF7ogjzqSZvaccDhycA3pAlXeHGXGqsg6rBY0j1VtMIrmZCuzy7qmYi4txSJOG2Q01G8PrYW2a1U5ZToGKUDOmOhHju6j_-1z1QWZH3IqJrPii-SHz-gRO99-2DVrgZ6eObwPUpOwqufYCOUlaDku1yM-YGq7q_Go6NUNb601oY9EeYYKSqxGT8Ne-rdUQoGos-hrg',
+    imageCaption: 'Arranged fresh at our Colombo studio',
+  },
+  {
+    id: 3, icon: DoorOpen, time: 'Afternoon', label: 'Careful Handover',
+    tag: 'DELIVERY', title: 'Careful Delivery Across Colombo',
+    description:
+      'Finished arrangements are delivered by our own couriers across Colombo and nearby suburbs, handed over directly rather than left unattended where possible.',
+    stat1Label: 'Delivery Style', stat1Value: 'Direct Handover',
+    stat2Label: 'Coverage', stat2Value: 'Colombo & Suburbs',
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDfEZqb2rdYT4qfGPZRsWQ5iDVPOIlF_jALfnqg4VwbWA_oB2uthdliMNCr6QA7mOdmlhfCl6Bdn8_5Ex6HiNw6xY0oQthmh9EYZl9gQoshKe-qiajs3OrkhO1x2EBkPjdW40m5LMljcSANV3Jk89CnVgTdykF_tbsXw31IFUDgC_RnW5jaN5Sbn8W5q3pQgwb7DKtP6KjJ3lepFLuHYc6e2mosvAcj7a3omEE7paKtMEuexyGOjNOAJA',
+    imageCaption: 'Delivered fresh across Colombo',
+  },
+]
+
+export default function ColdChainTimeline() {
+  const [activeId, setActiveId] = useState(0)
+  const active = STEPS.find((s) => s.id === activeId)!
+
+  return (
+    <section className="w-full py-20 bg-surface-container-low">
+      <div className="max-w-7xl mx-auto px-4 lg:px-12">
+        <div className="text-center max-w-3xl mx-auto mb-10 space-y-1">
+          <span className="text-[11px] text-secondary uppercase tracking-widest">From Farm to Doorstep</span>
+          <h2 className="font-display text-headline-lg text-primary">How We Keep Flowers Fresh</h2>
+          <p className="text-body-md text-on-surface-variant">
+            A same-day journey from the highlands to your table, designed around freshness at every step.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          {STEPS.map((step) => {
+            const Icon = step.icon
+            const isActive = step.id === activeId
+            return (
+              <button
+                key={step.id}
+                type="button"
+                onClick={() => setActiveId(step.id)}
+                className={`text-left p-4 rounded-xl transition-all flex flex-col justify-between h-32 ${
+                  isActive ? 'bg-surface-container-lowest shadow-sm' : 'bg-surface-container opacity-70 hover:opacity-100'
+                }`}
+              >
+                <div className="flex items-center justify-between w-full">
+                  <span className={`text-[11px] ${isActive ? 'text-tertiary' : 'text-secondary'}`}>STEP 0{step.id + 1}</span>
+                  <Icon size={20} className={isActive ? 'text-primary' : 'text-secondary'} />
+                </div>
+                <div>
+                  <p className="text-title-md text-primary">{step.time}</p>
+                  <p className="text-body-sm text-secondary truncate">{step.label}</p>
+                </div>
+              </button>
+            )
+          })}
+        </div>
+
+        <div className="bg-surface-container-lowest rounded-xl p-8 lg:p-14 shadow-md">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-6 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-fixed">
+                <span className="text-[11px] font-bold">{active.tag}</span>
+              </div>
+              <h3 className="font-display text-headline-lg text-primary leading-tight">{active.title}</h3>
+              <p className="text-body-md text-on-surface-variant leading-relaxed">{active.description}</p>
+              <div className="grid grid-cols-2 gap-4 pt-2">
+                <div className="p-3 rounded-lg bg-surface-container-low">
+                  <span className="text-[11px] text-secondary block">{active.stat1Label}</span>
+                  <span className="text-title-md text-primary font-bold">{active.stat1Value}</span>
+                </div>
+                <div className="p-3 rounded-lg bg-surface-container-low">
+                  <span className="text-[11px] text-secondary block">{active.stat2Label}</span>
+                  <span className="text-title-md text-primary font-bold">{active.stat2Value}</span>
+                </div>
+              </div>
+            </div>
+            <div className="lg:col-span-6">
+              <div className="relative h-80 lg:h-96 rounded-xl overflow-hidden shadow-inner">
+                <img className="w-full h-full object-cover" src={active.imageUrl} alt={active.title} />
+                <div className="absolute bottom-4 left-4 right-4 p-3 bg-primary/80 backdrop-blur-md rounded-lg text-on-primary text-[11px]">
+                  {active.imageCaption}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
